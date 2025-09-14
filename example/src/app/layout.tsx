@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AI SDK Zustand",
-  description: "Drop-in replacement for @ai-sdk/react with global state management",
+  title: "AI SDK Tools",
+  description: "A collection of tools for AI SDK, including ai-sdk-zustand and ai-sdk-devtools.",
 };
 
 export default function RootLayout({

@@ -27,12 +27,9 @@ export default function Home() {
         {/* Hero */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-40">
           <div className="space-y-12">
-            <h1 className="text-4xl font-normal leading-tight tracking-wide">
+            <h1 className="text-4xl font-normal leading-tight tracking-wide max-w-[600px]">
               AI chat state that
-              <br />
-              scales with your
-              <br />
-              application.
+              scales with your application.
           </h1>
             
             <p className="text-base text-secondary max-w-3xl leading-relaxed font-light">
