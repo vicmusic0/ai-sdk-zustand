@@ -1,19 +1,28 @@
-import { create } from 'zustand'
+import { create, type StoreApi } from 'zustand'
 import { devtools } from 'zustand/middleware'
 import type { UseChatHelpers, UIMessage } from '@ai-sdk/react'
 
 export interface ChatStore<TMessage extends UIMessage = UIMessage> extends UseChatHelpers<TMessage> {}
 
+// Internal sync method for connecting with useChat
+export interface ChatStoreWithSync<TMessage extends UIMessage = UIMessage> extends ChatStore<TMessage> {
+  _syncState: (newState: Partial<ChatStore<TMessage>>) => void
+}
+
+// Store instances map (using any for simplicity due to generic constraints)
 const storeInstances = new Map<string, any>()
 
-function createChatStore() {
-  return create<ChatStore>()(
+function createChatStore<TMessage extends UIMessage = UIMessage>(): StoreApi<ChatStoreWithSync<TMessage>> {
+  return create<ChatStoreWithSync<TMessage>>()(
     devtools(
       (set) => ({
+        // Default state matching UseChatHelpers interface
         id: '',
-        messages: [],
+        messages: [] as TMessage[],
         error: undefined,
         status: 'ready' as const,
+        
+        // Default no-op functions (will be replaced by useChat)
         sendMessage: async () => {},
         regenerate: async () => {},
         stop: async () => {},
@@ -21,10 +30,12 @@ function createChatStore() {
         addToolResult: async () => {},
         setMessages: () => {},
         clearError: () => {},
-        _syncState: (newState: Partial<ChatStore>) => {
+        
+        // Internal sync method for useChat integration
+        _syncState: (newState: Partial<ChatStore<TMessage>>) => {
           set(newState, false, 'syncFromUseChat')
         },
-      } as ChatStore & { _syncState: (newState: Partial<ChatStore>) => void }),
+      }),
       {
         name: 'ai-chat-store',
       }
@@ -32,36 +43,36 @@ function createChatStore() {
   )
 }
 
-export function getChatStore(storeId: string = 'default'): any {
+export function getChatStore<TMessage extends UIMessage = UIMessage>(
+  storeId: string = 'default'
+): any {
   if (!storeInstances.has(storeId)) {
-    storeInstances.set(storeId, createChatStore())
+    storeInstances.set(storeId, createChatStore<TMessage>())
   }
   return storeInstances.get(storeId)!
 }
 
-export function clearChatStore(storeId: string = 'default') {
+export function clearChatStore(storeId: string = 'default'): void {
   storeInstances.delete(storeId)
 }
 
-export function clearAllChatStores() {
+export function clearAllChatStores(): void {
   storeInstances.clear()
 }
 
-export function getChatStoreIds() {
+export function getChatStoreIds(): string[] {
   return Array.from(storeInstances.keys())
 }
 
-export type ChatStoreWithSync<TMessage extends UIMessage = UIMessage> = ChatStore<TMessage> & { 
-  _syncState: (newState: Partial<ChatStore<TMessage>>) => void 
-}
-
-// Helper function for users to create custom chat stores
+/**
+ * Create a custom chat store with optional middleware
+ * @param middleware Optional Zustand middleware to apply
+ * @returns A new chat store instance
+ */
 export function createCustomChatStore<TMessage extends UIMessage = UIMessage>(
-  middleware?: (config: any) => any
-) {
-  type StoreState = ChatStore<TMessage>
-  
-  const baseConfig = (_set: (partial: Partial<StoreState>) => void) => ({
+  middleware?: any
+): StoreApi<ChatStore<TMessage>> {
+  const storeConfig = (_set: any) => ({
     id: '',
     messages: [] as TMessage[],
     error: undefined as Error | undefined,
@@ -75,9 +86,7 @@ export function createCustomChatStore<TMessage extends UIMessage = UIMessage>(
     clearError: () => {},
   })
   
-  const baseStore = create<StoreState>()(
-    middleware ? middleware(baseConfig) : baseConfig
+  return create<ChatStore<TMessage>>()(
+    middleware ? middleware(storeConfig) : storeConfig
   )
-  
-  return baseStore
 }

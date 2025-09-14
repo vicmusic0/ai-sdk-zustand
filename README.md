@@ -1,6 +1,6 @@
 # ai-sdk-zustand
 
-Drop-in replacement for `@ai-sdk/react` that gives you global state access to your AI chats. No prop drilling, better performance, multiple chat instances.
+Drop-in replacement for `@ai-sdk/react` that gives you global state access to your AI chats. No prop drilling, better performance, simplified architecture.
 
 ## Why Use This?
 
@@ -9,7 +9,7 @@ Drop-in replacement for `@ai-sdk/react` that gives you global state access to yo
 **Solution**: Same `useChat` API + global Zustand store access from any component.
 
 ```bash
-bun add ai-sdk-zustand
+npm i ai-sdk-zustand
 ```
 
 ## Migration (30 seconds)
@@ -63,29 +63,29 @@ function MessageCount() {
 }
 
 function LoadingSpinner() {
-  const isLoading = useChatIsLoading() // Only re-renders when loading changes
+  const status = useChatStatus() // Only re-renders when status changes
+  return status === 'streaming' ? <Spinner /> : null
 }
 ```
 
-### 3. **Multiple Chat Instances**
+### 3. **Custom Types & Tool Calls**
 
 ```tsx
-function MultiChat() {
-  useChat({ api: '/api/support', storeId: 'support' })
-  useChat({ api: '/api/sales', storeId: 'sales' })
-  
-  return (
-    <div>
-      <SupportChat />
-      <SalesChat />
-    </div>
-  )
-}
+// Define custom message types
+interface MyMessage extends UIMessage<
+  { userId: string }, // metadata
+  { weather: WeatherData }, // data  
+  { getWeather: { input: { location: string }, output: WeatherData } } // tools
+> {}
 
-function SupportChat() {
-  const messages = useChatMessages('support')
-  const sendMessage = useChatSendMessage('support')
-}
+// Use with full typing
+const chat = useChat<MyMessage>({ api: '/api/chat' })
+const messages = useChatMessages<MyMessage>() // Fully typed!
+
+// Custom selectors work too
+const toolCallCount = useChatProperty(
+  (state) => state.messages.filter(m => m.parts?.some(p => p.type.startsWith('tool-')))
+)
 ```
 
 ### 4. **Custom Zustand Stores**
@@ -118,41 +118,32 @@ function PersistentChat() {
 // Main hook - same as @ai-sdk/react
 const chat = useChat({ api: '/api/chat' })
 
-// Store access
+// Store access - no parameters needed
 const messages = useChatMessages()
-const isLoading = useChatIsLoading()
+const status = useChatStatus()
 const sendMessage = useChatSendMessage()
 
-// Multiple chats
-const supportChat = useChat({ api: '/api/support', storeId: 'support' })
-const supportMessages = useChatMessages('support')
-
-// Custom store
+// Custom store (advanced)
 const chat = useChat({ store: myCustomStore })
 ```
 
-### Selectors (Performance)
+### Selectors
 
 ```tsx
-// Basic selectors
+// Core selectors
 useChatMessages()           // Message array
-useChatIsLoading()          // Loading state
+useChatStatus()             // Chat status ('ready' | 'streaming' | 'submitted' | 'error')
 useChatError()              // Error state
-useChatStatus()             // Chat status
 
-// Message selectors
-useChatLatestMessage()      // Last message
-useChatUserMessages()       // User messages only
-useChatAssistantMessages()  // Assistant messages only
-useChatMessageCount()       // Message count
-
-// Actions
+// Additional
 useChatSendMessage()        // Send function
-useChatRegenerate()         // Regenerate function
-useChatStop()               // Stop function
+useChatMessageCount()       // Message count
+useChatId()                 // Chat ID
+useChatActions()            // All actions object
 
-// Custom selector
+// Custom selector (main pattern for advanced use)
 useChatProperty(state => state.messages.filter(m => m.role === 'user'))
+useChatProperty(state => state.status === 'streaming') // Use status instead of isLoading
 ```
 
 ### Custom Stores
@@ -198,8 +189,8 @@ const messages = useChatMessages<MyMessage>() // Fully typed!
 **Use ai-sdk-zustand when:**
 - Multiple components need chat data
 - Building complex chat UIs  
-- Multiple chat instances
 - Need performance optimization
+- Want custom types with tool calls
 - Want persistence or custom middleware
 
 **Use regular useChat when:**
@@ -211,9 +202,10 @@ const messages = useChatMessages<MyMessage>() // Fully typed!
 - ✅ **Zero breaking changes** - same API
 - ✅ **Better performance** - selective re-renders
 - ✅ **No prop drilling** - access from anywhere
-- ✅ **Multiple chats** - easy with `storeId`
+- ✅ **Simplified architecture** - single global store
 - ✅ **Custom stores** - persistence, devtools, etc.
 - ✅ **Full TypeScript** - same generic support
+- ✅ **Tool call support** - custom types for AI tools
 
 ## License
 

@@ -39,7 +39,7 @@
   "peerDependencies": {
     "@ai-sdk/react": ">=2.0.0",
     "react": ">=18.0.0",
-    "zustand": ">=4.0.0"
+    "zustand": ">=5.0.0"
   },
   "devDependencies": {
     "@types/react": "^19.1.13",

@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { useShallow } from 'zustand/shallow'
 import { useChat as useOriginalChat, type UseChatOptions, type UseChatHelpers, type UIMessage } from '@ai-sdk/react'
 import { getChatStore, type ChatStore } from './store'
 
@@ -6,7 +7,7 @@ export type { UseChatOptions, UseChatHelpers }
 
 // Type for a compatible Zustand store
 export interface CompatibleChatStore<TMessage extends UIMessage = UIMessage> {
-  (selector: (state: ChatStore<TMessage>) => any): any
+  <T>(selector: (state: ChatStore<TMessage>) => T): T
   setState?: (partial: Partial<ChatStore<TMessage>>) => void
   _syncState?: (partial: Partial<ChatStore<TMessage>>) => void
 }
@@ -71,8 +72,9 @@ export function useChatStore<TMessage extends UIMessage = UIMessage, T = any>(
   selector: (state: ChatStore<TMessage>) => T,
   storeId: string = 'default'
 ): T {
-  const store = getChatStore(storeId) as CompatibleChatStore<TMessage>
-  return store(selector)
+  const store = getChatStore(storeId)
+ 
+  return store(useShallow(selector))
 }
 
 export function useChatStoreState<TMessage extends UIMessage = UIMessage>(
