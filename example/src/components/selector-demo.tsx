@@ -1,10 +1,8 @@
 'use client';
 
 import {
-  useChatMessages,
   useChatStatus,
-  useChatIsLoading,
-  useChatError,
+   useChatError,
   useChatProperty,
  } from 'ai-sdk-zustand';
 import type { CustomUIMessage } from '../types/custom-message';
@@ -13,10 +11,8 @@ interface SelectorDemoProps {}
 
 export function SelectorDemo({}: SelectorDemoProps) {
   // Core selectors
-  const messages = useChatMessages<CustomUIMessage>();
-  const status = useChatStatus();
-  const isLoading = useChatIsLoading();
-  const error = useChatError();
+   const status = useChatStatus();
+   const error = useChatError();
 
   // Custom selectors using useChatProperty - this is the main pattern
   const messageCount = useChatProperty<CustomUIMessage, number>(
@@ -78,7 +74,7 @@ export function SelectorDemo({}: SelectorDemoProps) {
             <div>│ Messages: <span className="text-blue-400">{messageCount}</span></div>
             <div>│ User: <span className="text-cyan-400">{userMessages.length}</span></div>
             <div>│ Assistant: <span className="text-purple-400">{assistantMessages.length}</span></div>
-            <div>│ Loading: <span className={isLoading ? "text-yellow-400" : "text-gray-400"}>{isLoading ? "●" : "○"}</span></div>
+            <div>│ Loading: <span className={status === "streaming" ? "text-yellow-400" : "text-gray-400"}>{status === "streaming" ? "●" : "○"}</span></div>
             <div>│ Tool Calls: <span className="text-orange-400">{toolCallCount}</span></div>
           </div>
           <div className="text-gray-400">└ Analysis complete</div>

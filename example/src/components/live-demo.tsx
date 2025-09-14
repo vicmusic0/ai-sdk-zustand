@@ -95,6 +95,7 @@ export function LiveDemo() {
               {messages.map((message) => (
                 <div key={message.id} className="text-xs">
                   <span className="text-[#d4d4d4]">{message.role}:</span> 
+                  {/* @ts-ignore - just a dummy demo */}
                   <span className="text-secondary ml-2">{message.content}</span>
                 </div>
               ))}
