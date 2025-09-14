@@ -12,13 +12,13 @@
   "dependencies": {
     "@ai-sdk/openai": "^2.0.30",
     "ai": "^5.0.44",
-    "ai-sdk-zustand": "file:../",
-    "zod": "^4.1.8",
+    "ai-sdk-zustand": "^0.1.0",
     "i": "^0.3.7",
     "next": "15.5.3",
     "react": "19.1.1",
     "react-dom": "19.1.1",
-    "sugar-high": "^0.9.3"
+    "sugar-high": "^0.9.3",
+    "zod": "^4.1.8"
   },
   "devDependencies": {
     "typescript": "^5",
